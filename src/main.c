@@ -1,8 +1,9 @@
-#include <string.h>
 #define INDENT_LENGTH 4
 #define BUFFER_LENGTH 1024
 
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 
 static void print_indents(int indent_level){
     for(int i = 0; i < indent_level * INDENT_LENGTH; i++){
@@ -16,6 +17,7 @@ int main(int argc, char **argv){
 
     int indent_level = 0;
     int json_length = strlen(json_string);
+    bool in_string_literal = false;
 
     for(int i = 0; i < json_length; i++){
         switch (json_string[i]) {
@@ -45,14 +47,22 @@ int main(int argc, char **argv){
             indent_level--;
             break;
 
+            case '"':
+            printf("\"");
+            in_string_literal = in_string_literal ? false : true;
+            break;
+
             case ',':
             printf(",\n");
             print_indents(indent_level);
             break;
 
             case ':':
-            printf(":");
-            if(json_string[i+1] != ' ') printf(" ");
+            printf(": ");
+            break;
+
+            case ' ':
+            if(in_string_literal) printf(" ");
             break;
 
             default:
