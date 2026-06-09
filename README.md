@@ -31,3 +31,16 @@ cd jlook
 make
 sudo make install # Specify install direcory by using: make install PREFIX=[path/to/install]
 ```
+
+## Uninstalling
+We offer a uninstall target that you can use in the directory like this:  
+
+```shell
+sudo make uninstall
+```
+
+You would need to specify the prefix again the same way you would in Building. Another way to do it, is to deleting the executable manually. It is safer since `which` will automatically return the directory instead of relying in my Makefile skills.
+
+```shell
+sudo rm -f $(which jlook)
+```
