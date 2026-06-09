@@ -38,9 +38,11 @@ int main(int argc, char **argv){
             break;
 
             case ']':
-            printf("]\n");
             indent_level--;
+            printf("\n");
             print_indents(indent_level);
+            printf("]");
+            indent_level--;
             break;
 
             case ',':
