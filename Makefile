@@ -12,7 +12,7 @@ install: jlook
 	cp jlook $(PREFIX)
 
 uninstall:
-	rm -f $(PREFIX)/jlook
+	rm -f $(shell which jlook)
 
 clean:
 	rm -f jlook
