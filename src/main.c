@@ -26,7 +26,7 @@ int main(int argc, char **argv){
             break;
 
             case '}':
-            printf("}\n");
+            printf("\n}\n");
             indent_level--;
             print_indents(indent_level);
             break;
@@ -49,7 +49,8 @@ int main(int argc, char **argv){
             break;
 
             case ':':
-            printf(": ");
+            printf(":");
+            if(json_string[i+1] != ' ') printf(" ");
             break;
 
             default:
