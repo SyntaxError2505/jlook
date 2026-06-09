@@ -1,6 +1,7 @@
 sourceFiles := src/main.c
+compilerArgs := -std=c17
 
 default: main
 
-main:
-	gcc -o main $(sourceFiles)
+main: $(sourceFiles)
+	gcc -o main $(compilerArgs) $(sourceFiles)
