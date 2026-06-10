@@ -66,7 +66,7 @@ int main(int argc, char **argv){
             break;
         } 
 
-        } else {
+        } else { // if(in_string_literal)
             if(json_string[i] == '"'){
                 in_string_literal = false;
             }
