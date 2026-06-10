@@ -20,6 +20,7 @@ int main(int argc, char **argv){
     bool in_string_literal = false;
 
     for(int i = 0; i < json_length; i++){
+        if(!in_string_literal){
         switch (json_string[i]) {
             case '{':
             printf("{\n");
@@ -49,7 +50,7 @@ int main(int argc, char **argv){
 
             case '"':
             printf("\"");
-            in_string_literal = in_string_literal ? false : true;
+            in_string_literal = true;
             break;
 
             case ',':
@@ -61,15 +62,17 @@ int main(int argc, char **argv){
             printf(": ");
             break;
 
-            case ' ':
-            if(in_string_literal) printf(" ");
-            break;
-
             default:
             printf("%c", json_string[i]);
             break;
+        } 
+
+        } else {
+            if(json_string[i] == '"'){
+                in_string_literal = false;
+            }
+            printf("%c", json_string[i]);
         }
     }
-
     return 0;
 }
