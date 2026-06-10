@@ -45,7 +45,6 @@ int main(int argc, char **argv){
             printf("\n");
             print_indents(indent_level);
             printf("]");
-            indent_level--;
             break;
 
             case '"':
