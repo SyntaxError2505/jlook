@@ -1,6 +1,6 @@
 PREFIX ?= /usr/local/bin
 
-sourceFiles := src/main.c
+sourceFiles := src/main.c src/PrintJson.c
 compilerArgs := -std=c17
 
 default: jlook
