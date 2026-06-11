@@ -1,14 +1,11 @@
-#define BUFFER_LENGTH 1024
-
-#include <stdio.h>
 #include <stdbool.h>
 
 #include "PrintJson.h"
+#include "ReadPipe.h"
 
 
 int main(int argc, char **argv){
-    char json_string[BUFFER_LENGTH];
-    fgets(json_string, BUFFER_LENGTH, stdin);
+    char* json_string = readPipe();
 
     int indent_level = 0;
     bool in_string_literal = false;
