@@ -23,9 +23,10 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
                 break;
 
                 case '}':
-                    printf("\n}\n");
                     *indent_level -= 1;
+                    printf("\n");
                     printIndents(*indent_level);
+                    printf("}\n");
                 break;
 
                 case '[':
