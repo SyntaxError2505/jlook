@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <string.h>
 
 #include "PrintJson.h"
 
@@ -12,7 +11,6 @@ int main(int argc, char **argv){
     fgets(json_string, BUFFER_LENGTH, stdin);
 
     int indent_level = 0;
-    int json_length = strlen(json_string);
     bool in_string_literal = false;
 
     printJson(&in_string_literal, &indent_level, json_string);
