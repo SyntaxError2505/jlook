@@ -55,6 +55,12 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
                     printf(": ");
                 break;
 
+                case ' ':
+                break;
+
+                case '\n':
+                break;
+
                 default:
                     printf("%c", json_string[i]);
                 break;
