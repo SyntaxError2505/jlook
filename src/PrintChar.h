@@ -3,10 +3,11 @@
 
 enum Color {
     STRING_LITERAL,
-    NUMBER,
+    NUMBER_LITERAL,
     BRACKETS_1,
     BRACKETS_2,
     BRACKETS_3,
+    OTHER,
 };
 
 void printChar(char c, enum Color color);

@@ -1,6 +1,8 @@
-#include "PrintJson.h"
 #include <stdio.h>
 #include <string.h>
+
+#include "PrintJson.h"
+#include "PrintChar.h"
 
 #define INDENT_LENGTH 4
 
@@ -26,7 +28,14 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
                     *indent_level -= 1;
                     printf("\n");
                     printIndents(*indent_level);
-                    printf("}\n");
+                    printf("}");
+                    if (json_string[i + 1] == ',') {
+                        printChar(',', OTHER);
+                        i++;
+                    }
+                    printChar('\n', OTHER);
+                    printIndents(*indent_level);
+
                 break;
 
                 case '[':
@@ -43,7 +52,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
                 break;
 
                 case '"':
-                    printf("\"");
+                    printChar('"', STRING_LITERAL);
                     *in_string_literal = true;
                 break;
 
@@ -64,6 +73,11 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
 
                 default:
                     printf("%c", json_string[i]);
+                    if (json_string[i] > '0' && json_string[i] < '9' || json_string[i] == '.') {
+                        printChar(json_string[i], NUMBER_LITERAL);
+                    } else {
+                        printChar(json_string[i], OTHER);
+                    }
                 break;
             } 
 
@@ -71,7 +85,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
             if(json_string[i] == '"'){
                 *in_string_literal = false;
             }
-            printf("%c", json_string[i]);
+            printChar(json_string[i], STRING_LITERAL);
         }
     }
 }
