@@ -2,6 +2,7 @@
 
 #include "PrintJson.h"
 #include "ReadPipe.h"
+#include "PrintChar.h"
 
 
 int main(int argc, char **argv){

@@ -9,6 +9,6 @@ enum Color {
     BRACKETS_3,
 };
 
-void printChar(char c, Color color);
+void printChar(char c, enum Color color);
 
 #endif
