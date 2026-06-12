@@ -72,8 +72,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
                 break;
 
                 default:
-                    printf("%c", json_string[i]);
-                    if (json_string[i] > '0' && json_string[i] < '9' || json_string[i] == '.') {
+                    if (json_string[i] >= '0' && json_string[i] <= '9' || json_string[i] == '.') {
                         printChar(json_string[i], NUMBER_LITERAL);
                     } else {
                         printChar(json_string[i], OTHER);
