@@ -12,7 +12,7 @@ void printIndents(int indent_level){
     }
 }
 
-void printJson(bool* in_string_literal, int *indent_level, char *json_string){
+void printJson(bool* in_string_literal, int *indent_level, char *json_string, int indent_length, bool color){
     size_t json_length = strlen(json_string);
 
     for(int i = 0; i < json_length; i++){
@@ -52,7 +52,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
                 break;
 
                 case '"':
-                    printChar('"', STRING_LITERAL);
+                    printChar('"', color ? STRING_LITERAL : OTHER);
                     *in_string_literal = true;
                 break;
 
@@ -73,7 +73,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
 
                 default:
                     if (json_string[i] >= '0' && json_string[i] <= '9' || json_string[i] == '.') {
-                        printChar(json_string[i], NUMBER_LITERAL);
+                        printChar(json_string[i], color ? NUMBER_LITERAL : OTHER);
                     } else {
                         printChar(json_string[i], OTHER);
                     }
@@ -84,7 +84,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string){
             if(json_string[i] == '"'){
                 *in_string_literal = false;
             }
-            printChar(json_string[i], STRING_LITERAL);
+            printChar(json_string[i], color ? STRING_LITERAL : OTHER);
         }
     }
 }
