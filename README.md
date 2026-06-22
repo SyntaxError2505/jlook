@@ -28,8 +28,8 @@ A build process would look like this:
 git clone https://github.com/SyntaxError2505/jlook.git
 cd jlook
 
-make
-sudo make install # Specify install direcory by using: make install PREFIX=[path/to/install]
+make DEBUG=0 # If you want to use a debugger on it, set it to or just don't set it (Debug is the standard)
+sudo make install # Specify install direcory by using: make install PREFIX=path/to/install
 ```
 
 ## Uninstalling
