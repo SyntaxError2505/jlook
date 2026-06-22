@@ -1,18 +1,28 @@
+CFLAGS := -std=c17 -Wall -Wextra
+TARGET := jlook
+
+SOURCE = $(shell find "src" -type f -name "*.c")
+
+DEBUG ?= 1
 PREFIX ?= /usr/local/bin
+CC ?= gcc
 
-sourceFiles := src/main.c src/PrintJson.c src/ReadPipe.c src/PrintChar.c src/Args.c
-compilerArgs := -std=c17
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g -O0
+else 
+	CFLAGS += -O3
+endif
 
-default: jlook
+default: $(TARGET)
 
-jlook: $(sourceFiles)
-	gcc -o jlook $(compilerArgs) $(sourceFiles)
+$(TARGET): $(SOURCE)
+	gcc -o $(TARGET) $(CFLAGS) $(SOURCE)
 
-install: jlook
-	cp jlook $(PREFIX)
+install: $(TARGET)
+	cp $(TARGET) $(PREFIX)
 
 uninstall:
-	rm -f $(shell which jlook)
+	rm -f $(shell which $(TARGET))
 
 clean:
-	rm -f jlook
+	rm -f $(TARGET)
