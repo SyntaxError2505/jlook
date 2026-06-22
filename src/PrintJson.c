@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -15,7 +16,7 @@ void printIndents(int indent_level){
 void printJson(bool* in_string_literal, int *indent_level, char *json_string, int indent_length, bool color){
     size_t json_length = strlen(json_string);
 
-    for(int i = 0; i < json_length; i++){
+    for(size_t i = 0; i < json_length; i++){
         if(!(*in_string_literal)){
             switch (json_string[i]) {
                 case '{':
@@ -72,7 +73,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
                 break;
 
                 default:
-                    if (json_string[i] >= '0' && json_string[i] <= '9' || json_string[i] == '.') {
+                    if ((json_string[i] >= '0' && json_string[i] <= '9') || json_string[i] == '.') {
                         printChar(json_string[i], color ? NUMBER_LITERAL : OTHER);
                     } else {
                         printChar(json_string[i], OTHER);
