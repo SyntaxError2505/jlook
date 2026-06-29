@@ -4,6 +4,9 @@
 
 #define ANSI_COLOR_GREEN "\x1b[32m"
 #define ANSI_COLOR_BLUE "\e[0;34m"
+#define ANSI_COLOR_YELLOW "\x1b[33m"
+#define ANSI_COLOR_CYAN "\x1b[36m"
+#define ANSI_COLOR_ORANGE "\x1b[38;5;208m"
 
 #define ANSI_COLOR_RESET "\x1b[0m"
 
