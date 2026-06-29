@@ -20,7 +20,8 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
         if(!(*in_string_literal)){
             switch (json_string[i]) {
                 case '{':
-                    printf("{\n");
+                    printChar('{', BRACES_1 + *indent_level);
+                    printChar('\n', OTHER);
                     *indent_level += 1;
                     printIndents(*indent_level, indent_length);
                 break;
@@ -29,7 +30,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
                     *indent_level -= 1;
                     printf("\n");
                     printIndents(*indent_level, indent_length);
-                    printf("}");
+                    printChar('}', BRACES_1 + *indent_level);
                     if (json_string[i + 1] == ',') {
                         printChar(',', OTHER);
                         i++;
@@ -40,7 +41,8 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
                 break;
 
                 case '[':
-                    printf("[\n");
+                    printChar('{', BRACES_1 + *indent_level);
+                    printChar('\n', OTHER);
                     *indent_level += 1;
                     printIndents(*indent_level, indent_length);
                 break;
@@ -49,7 +51,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
                     *indent_level -= 1;
                     printf("\n");
                     printIndents(*indent_level, indent_length);
-                    printf("]");
+                    printChar(']', BRACES_1 + *indent_level);
                 break;
 
                 case '"':
