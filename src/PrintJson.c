@@ -7,8 +7,8 @@
 
 #define INDENT_LENGTH 4
 
-void printIndents(int indent_level){
-    for(int i = 0; i < indent_level * INDENT_LENGTH; i++){
+void printIndents(int indent_level, int length){
+    for(int i = 0; i < indent_level * length; i++){
         printf(" ");
     }
 }
@@ -20,36 +20,38 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
         if(!(*in_string_literal)){
             switch (json_string[i]) {
                 case '{':
-                    printf("{\n");
+                    printChar('{', BRACKETS_1 + *indent_level);
+                    printChar('\n', OTHER);
                     *indent_level += 1;
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
                 break;
 
                 case '}':
                     *indent_level -= 1;
                     printf("\n");
-                    printIndents(*indent_level);
-                    printf("}");
+                    printIndents(*indent_level, indent_length);
+                    printChar('}', BRACKETS_1 + *indent_level);
                     if (json_string[i + 1] == ',') {
                         printChar(',', OTHER);
                         i++;
                     }
                     printChar('\n', OTHER);
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
 
                 break;
 
                 case '[':
-                    printf("[\n");
+                    printChar('[', BRACKETS_1 + *indent_level);
+                    printChar('\n', OTHER);
                     *indent_level += 1;
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
                 break;
 
                 case ']':
                     *indent_level -= 1;
                     printf("\n");
-                    printIndents(*indent_level);
-                    printf("]");
+                    printIndents(*indent_level, indent_length);
+                    printChar(']', BRACKETS_1 + *indent_level);
                 break;
 
                 case '"':
@@ -59,7 +61,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
 
                 case ',':
                     printf(",\n");
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
                 break;
 
                 case ':':
