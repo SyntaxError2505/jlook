@@ -24,6 +24,18 @@ void printChar(char c, enum Color color){
         printf("%c", c);
         break;
 
+        case BRACKETS_1:
+        printf("%s%c%s", ANSI_COLOR_YELLOW, c, ANSI_COLOR_RESET);
+        break;
+
+        case BRACKETS_2:
+        printf("%s%c%s", ANSI_COLOR_CYAN, c, ANSI_COLOR_RESET);
+        break;
+
+        case BRACKETS_3:
+        printf("%s%c%s", ANSI_COLOR_ORANGE, c, ANSI_COLOR_RESET);
+        break;
+
         default:
         printf("UNKNOWN COLOR");
         break;
