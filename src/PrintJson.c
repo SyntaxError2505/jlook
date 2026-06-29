@@ -7,8 +7,8 @@
 
 #define INDENT_LENGTH 4
 
-void printIndents(int indent_level){
-    for(int i = 0; i < indent_level * INDENT_LENGTH; i++){
+void printIndents(int indent_level, int length){
+    for(int i = 0; i < indent_level * length; i++){
         printf(" ");
     }
 }
@@ -22,33 +22,33 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
                 case '{':
                     printf("{\n");
                     *indent_level += 1;
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
                 break;
 
                 case '}':
                     *indent_level -= 1;
                     printf("\n");
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
                     printf("}");
                     if (json_string[i + 1] == ',') {
                         printChar(',', OTHER);
                         i++;
                     }
                     printChar('\n', OTHER);
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
 
                 break;
 
                 case '[':
                     printf("[\n");
                     *indent_level += 1;
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
                 break;
 
                 case ']':
                     *indent_level -= 1;
                     printf("\n");
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
                     printf("]");
                 break;
 
@@ -59,7 +59,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
 
                 case ',':
                     printf(",\n");
-                    printIndents(*indent_level);
+                    printIndents(*indent_level, indent_length);
                 break;
 
                 case ':':
