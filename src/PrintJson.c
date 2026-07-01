@@ -1,9 +1,9 @@
 #include <stddef.h>
 #include <stdio.h>
-#include <string.h>
 
 #include "PrintJson.h"
 #include "PrintChar.h"
+#include "ReadPipe.h"
 
 #define INDENT_LENGTH 4
 
@@ -13,12 +13,12 @@ void printIndents(int indent_level, int length){
     }
 }
 
-void printJson(bool* in_string_literal, int *indent_level, char *json_string, int indent_length, bool color){
-    size_t json_length = strlen(json_string);
-
-    for(size_t i = 0; i < json_length; i++){
+void printJson(bool* in_string_literal, int *indent_level, int indent_length, bool color){
+    while(1) {
+        char c = readPipe();
+        if(c == 0) break;
         if(!(*in_string_literal)){
-            switch (json_string[i]) {
+            switch (c) {
                 case '{':
                     printChar('{', BRACKETS_1 + *indent_level);
                     printChar('\n', OTHER);
@@ -31,7 +31,7 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
                     printf("\n");
                     printIndents(*indent_level, indent_length);
                     printChar('}', BRACKETS_1 + *indent_level);
-                    if (json_string[++i] == ',') {
+                    if (readPipe() == ',') {
                         printChar(',', OTHER);
                     }
                     printChar('\n', OTHER);
@@ -73,19 +73,19 @@ void printJson(bool* in_string_literal, int *indent_level, char *json_string, in
                 break;
 
                 default:
-                    if ((json_string[i] >= '0' && json_string[i] <= '9') || json_string[i] == '.') {
-                        printChar(json_string[i], color ? NUMBER_LITERAL : OTHER);
+                    if ((c >= '0' && c <= '9') || c == '.') {
+                        printChar(c, color ? NUMBER_LITERAL : OTHER);
                     } else {
-                        printChar(json_string[i], OTHER);
+                        printChar(c, OTHER);
                     }
                 break;
             } 
 
         } else { // if(in_string_literal)
-            if(json_string[i] == '"'){
+            if(c == '"'){
                 *in_string_literal = false;
             }
-            printChar(json_string[i], color ? STRING_LITERAL : OTHER);
+            printChar(c, color ? STRING_LITERAL : OTHER);
         }
     }
 }
