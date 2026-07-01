@@ -22,21 +22,19 @@ void parseArgs(struct Args *args, int argc, char** argv){
         if(strcmp(argv[i], "-i") == 0){
             i++;
             if(i > argc - 1){
-                printf("JLOOK: -i requires to be followed by a number\n");
+                printf("JLOOK: -i requires to be followed by a number. Stopping\n");
                 exit(-1);
             }
             args->indent_length = atoi(argv[i]);
             continue;
-        }
-
-        if(strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0){
+        } else if(strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0){
             printHelp();
             exit(0);
-        }
- 
-        if(strcmp(argv[i], "-nc") == 0 || strcmp(argv[i], "--no-color") == 0){
+        } else if(strcmp(argv[i], "-nc") == 0 || strcmp(argv[i], "--no-color") == 0){
             args->color = false;
             continue;
+        } else {
+            printf("Unknown Argument: \"%s\". Ignoring and continuing execution\n", argv[i]);
         }
     }
 }
