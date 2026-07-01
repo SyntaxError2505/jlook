@@ -36,7 +36,7 @@ void parseArgs(struct Args *args, int argc, char** argv){
             continue;
         }
 
-        if(strcmp(argv[i], "--help") == 0 || strcmp(argv[1], "-h") == 0){
+        if(strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0){
             printHelp();
             exit(0);
         }
