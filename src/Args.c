@@ -5,17 +5,15 @@
 #include <string.h>
 
 static void printHelp(){
-printf("\
-JLOOK - a pipeable json prettyfier\
-\njlook [args]\
-\nArgs:\
-\n-h --help:      Print this page and exit\
-\n-i [length]:    Set length of indents to [length]. Space in between arg and variable is required\
-\n-nc --no-color: Print without syntax coloring, good for piping into other programs without support for color\
-\n\
-");
-} // printHelp
-
+    printf(
+        "JLOOK - a pipeable json prettyfier\n\n"
+        "jlook [args]\n"
+        "Args:\n"
+        "  -h --help:       Print this page and exit\n"
+        "  -i [length]:     Set length of indents to [length]. Space in between arg and variable is required\n"
+        "  -nc --no-color:  Print without syntax coloring, good for piping into other programs without support for color\n"
+    );
+}
 void parseArgs(struct Args *args, int argc, char** argv){
     args->color = true;
     args->indent_length = 4;
