@@ -5,14 +5,16 @@
 #include <string.h>
 
 static void printHelp(){
-    printf("JLOOK - a pipeable json prettyfier\n \
-            Synopsis: \n \
-            jlook [args] \n \
-            ARGS: \n \
-            --help Print this page and exit\n \
-            -nc Print without syntax coloring, good for piping into other programs\n \
-            -i [indent_length] Set length of indents to indent_length. Space in between arg and variable is required\n");
-}
+printf("\
+JLOOK - a pipeable json prettyfier\
+\njlook [args]\
+\nArgs:\
+\n-h --help:      Print this page and exit\
+\n-nc --no-color: Print without syntax coloring, good for piping into other programs without support for color\
+\n-i [length]:    Set length of indents to [length]. Space in between arg and variable is required\
+\n\
+");
+} // printHelp
 
 void parseArgs(struct Args *args, int argc, char** argv){
     args->color = true;
@@ -29,12 +31,12 @@ void parseArgs(struct Args *args, int argc, char** argv){
             continue;
         }
 
-        if(strcmp(argv[i], "-nc") == 0){
+        if(strcmp(argv[i], "-nc") == 0 || strcmp(argv[i], "--no-color") == 0){
             args->color = false;
             continue;
         }
 
-        if(strcmp(argv[i], "--help") == 0){
+        if(strcmp(argv[i], "--help") == 0 || strcmp(argv[1], "-h") == 0){
             printHelp();
             exit(0);
         }
