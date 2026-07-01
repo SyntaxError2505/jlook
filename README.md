@@ -1,5 +1,9 @@
 # Jlook
 because your json deserves better
+
+![A screenshot of various jlook functionality showing off linting, optional syntax highlighting and a help page](/images/demo.png)
+jlooks functions including linting and syntax highlighting in bash pipes
+
 ## Usage
 After installing jlook, it is really easy to use. Just call the executable trough a shell like
 
