@@ -5,7 +5,7 @@ SOURCE = $(shell find "src" -type f -name "*.c")
 
 DEBUG ?= 1
 PREFIX ?= /usr/local/bin
-CC ?= gcc
+CC := cc
 
 ifeq ($(DEBUG), 1)
 	CFLAGS += -g -O0
@@ -24,5 +24,6 @@ install: $(TARGET)
 uninstall:
 	rm -f $(shell which $(TARGET))
 
+.PHONY: clean
 clean:
 	rm -f $(TARGET)
