@@ -1,27 +1,15 @@
 #include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "PrintJson.h"
-#include "ReadPipe.h"
 #include "Args.h"
 
 int main(int argc, char **argv){
     struct Args args;
     parseArgs(&args ,argc, argv);
 
-    char* json_string = readPipe();
-    if(json_string == NULL){
-        fprintf(stderr, "JLOOK: ALLOCATING JSON FAILED, CHECK IF YOU HAVE ENOUGH RAM\n");
-        return -1;
-    }
-
     int indent_level = 0;
     bool in_string_literal = false;
 
-    printJson(&in_string_literal, &indent_level, json_string, args.indent_length, args.color);
-
-    free(json_string);
+    printJson(&in_string_literal, &indent_level, args.indent_length, args.color);
 
     return 0;
 }
