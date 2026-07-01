@@ -19,7 +19,7 @@ void printJson(bool* in_string_literal, int *indent_level, struct Args *args){
         if(!(*in_string_literal)){
             switch (c) {
                 case '{':
-                    printChar('{', BRACKETS_1 + *indent_level);
+                    printChar('{', args->color ? BRACKETS_1 + *indent_level : OTHER);
                     printChar('\n', OTHER);
                     (*indent_level)++;
                     printIndents(*indent_level, args->indent_length);
@@ -29,7 +29,7 @@ void printJson(bool* in_string_literal, int *indent_level, struct Args *args){
                     *indent_level -= 1;
                     printf("\n");
                     printIndents(*indent_level, args->indent_length);
-                    printChar('}', BRACKETS_1 + *indent_level);
+                    printChar('}', args->color ? BRACKETS_1 + *indent_level : OTHER);
                     if (readPipe() == ',') {
                         printChar(',', OTHER);
                     }
@@ -39,7 +39,7 @@ void printJson(bool* in_string_literal, int *indent_level, struct Args *args){
                 break;
 
                 case '[':
-                    printChar('[', BRACKETS_1 + *indent_level);
+                    printChar('[', args->color ? BRACKETS_1 + *indent_level : OTHER);
                     printChar('\n', OTHER);
                     (*indent_level)++;
                     printIndents(*indent_level, args->indent_length);
@@ -49,7 +49,7 @@ void printJson(bool* in_string_literal, int *indent_level, struct Args *args){
                     *indent_level -= 1;
                     printf("\n");
                     printIndents(*indent_level, args->indent_length);
-                    printChar(']', BRACKETS_1 + *indent_level);
+                    printChar(']', args->color ? BRACKETS_1 + *indent_level : OTHER);
                 break;
 
                 case '"':
