@@ -1,3 +1,5 @@
+.PHONY: default install uninstall clean
+
 CFLAGS := -std=c17 -Wall -Wextra
 TARGET := jlook
 
@@ -24,6 +26,5 @@ install: $(TARGET)
 uninstall:
 	rm -f $(shell which $(TARGET))
 
-.PHONY: clean
 clean:
 	rm -f $(TARGET)
