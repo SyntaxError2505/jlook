@@ -13,7 +13,7 @@ It will ask for a single-line input of valid JSON and, after confirming by press
 cat test.json | jlook
 ```
 
-It will just print out the pretty result which you can `pipe` pipe into any utility you like. I recommend trying `tee` to write it into a file like this:
+It will just print out the pretty result which you can `pipe` pipe into any utility you like. E.g `tee` to write output into a file like this:
 
 ```shell
 cat test.json | jlook | tee pretty_test.json
@@ -28,8 +28,15 @@ A build process would look like this:
 git clone https://github.com/SyntaxError2505/jlook.git
 cd jlook
 
-make DEBUG=0 # If you want to use a debugger on it, set it to 1 or just don't set it (Debug is the standard)
-sudo make install # Specify install direcory by using: make install PREFIX=path/to/install
+# If you just want to build it:
+make DEBUG=0 # Remove DEBUG if you wan't a debug build. Debug builds are slower and bigger.
+
+# If DEBUG mode was on, remove debug exectutable before installation
+make clean
+
+# Installing it globally
+sudo make install DEBUG=0 # Debug builds are not intended for installation. This is how to install a release build. Specify install directory by setting PREFIX:
+sudo make install PREFIX=path/to/install/directory # Default is /usr/local/bin/
 ```
 
 ## Uninstalling
