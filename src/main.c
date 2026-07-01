@@ -9,7 +9,7 @@ int main(int argc, char **argv){
     int indent_level = 0;
     bool in_string_literal = false;
 
-    printJson(&in_string_literal, &indent_level, args.indent_length, args.color);
+    printJson(&in_string_literal, &indent_level, &args);
 
     return 0;
 }
