@@ -66,6 +66,25 @@ void printJson(bool* in_string_literal, int *indent_level, struct Args *args){
                     printf(": ");
                 break;
 
+                case '/':
+                    if(readPipe() == '/'){
+                        printChar('/', COMMENT);
+                        printChar('/', COMMENT);
+                        while(1){
+                            char comment = readPipe();
+                            if(comment == 0){
+                                printChar('\n', OTHER);
+                                return;
+                            } else if(comment == '\n') {
+                                printChar('\n', OTHER);
+                                break;
+                            } else {
+                                printChar(comment, COMMENT);
+                            }
+                        }
+                    }
+                break;
+
                 case ' ':
                 break;
                 case '\n':
