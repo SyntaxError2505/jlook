@@ -77,6 +77,7 @@ void printJson(bool* in_string_literal, int *indent_level, struct Args *args){
                                 return;
                             } else if(comment == '\n') {
                                 printChar('\n', OTHER);
+                                printIndents(*indent_level, args->indent_length);
                                 break;
                             } else {
                                 printChar(comment, COMMENT);
