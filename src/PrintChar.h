@@ -7,6 +7,7 @@ enum Color {
     BRACKETS_1,
     BRACKETS_2,
     BRACKETS_3,
+    COMMENT,
     OTHER,
 };
 
