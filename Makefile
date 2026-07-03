@@ -18,7 +18,7 @@ endif
 default: $(TARGET)
 
 $(TARGET): $(SOURCE)
-	gcc -o $(TARGET) $(CFLAGS) $(SOURCE)
+	$(CC) -o $(TARGET) $(CFLAGS) $(SOURCE)
 
 install: $(TARGET)
 	cp $(TARGET) $(PREFIX)
