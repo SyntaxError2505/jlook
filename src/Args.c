@@ -1,4 +1,5 @@
 #include "Args.h"
+#include "../config.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -12,6 +13,7 @@ static void printHelp(){
         "  -h --help:       Print this page and exit\n"
         "  -i [length]:     Set length of indents to [length]. Space in between arg and variable is required\n"
         "  -nc --no-color:  Print without syntax coloring, good for piping into other programs without support for color\n"
+        "  -v --version     Print version number and exit\n"
     );
 }
 void parseArgs(struct Args *args, int argc, char** argv){
@@ -33,6 +35,9 @@ void parseArgs(struct Args *args, int argc, char** argv){
         } else if(strcmp(argv[i], "-nc") == 0 || strcmp(argv[i], "--no-color") == 0){
             args->color = false;
             continue;
+        } else if(strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "--version") == 0){
+            printf("Jlook version: %s\n", JLOOK_VERSION);
+            exit(0);
         } else {
             printf("Unknown Argument: \"%s\". Ignoring and continuing execution\n", argv[i]);
         }
