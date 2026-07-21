@@ -1,9 +1,8 @@
-.PHONY: default install uninstall clean
-
 CFLAGS := -std=c17 -Wall -Wextra
 TARGET := jlook
 
 SOURCE = $(shell find "src" -type f -name "*.c")
+HEADERS = $(shell find "src" -type f -name "*.h")
 
 DEBUG ?= 1
 PREFIX ?= /usr/local/bin
@@ -28,3 +27,8 @@ uninstall:
 
 clean:
 	rm -f $(TARGET)
+
+format:
+	clang-format -i $(SOURCE) $(HEADERS)
+
+.PHONY: default install uninstall clean format
