@@ -8,6 +8,6 @@ struct Args {
     bool color;
 };
 
-void parseArgs(struct Args *args, int argc, char** argv);
+void parseArgs(struct Args *args, int argc, char **argv);
 
 #endif

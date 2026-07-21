@@ -1,107 +1,114 @@
-#include <stdio.h>
 #include "PrintJson.h"
+
+#include <stdio.h>
+
+#include "Args.h"
 #include "PrintChar.h"
 #include "ReadPipe.h"
-#include "Args.h"
 
 #define INDENT_LENGTH 4
 
-void printIndents(int indent_level, int length){
-    for(int i = 0; i < indent_level * length; i++){
+void printIndents(int indent_level, int length) {
+    for (int i = 0; i < indent_level * length; i++) {
         printf(" ");
     }
 }
 
-void printJson(bool* in_string_literal, int *indent_level, struct Args *args){
-    while(1) {
+void printJson(bool *in_string_literal, int *indent_level, struct Args *args) {
+    while (1) {
         char c = readPipe();
-        if(c == 0) break;
-        if(!(*in_string_literal)){
+        if (c == 0)
+            break;
+        if (!(*in_string_literal)) {
             switch (c) {
-                case '{':
-                    printChar('{', args->color ? BRACKETS_1 + *indent_level : OTHER);
-                    printChar('\n', OTHER);
-                    (*indent_level)++;
-                    printIndents(*indent_level, args->indent_length);
+            case '{':
+                printChar('{',
+                          args->color ? BRACKETS_1 + *indent_level : OTHER);
+                printChar('\n', OTHER);
+                (*indent_level)++;
+                printIndents(*indent_level, args->indent_length);
                 break;
 
-                case '}':
-                    *indent_level -= 1;
-                    printf("\n");
-                    printIndents(*indent_level, args->indent_length);
-                    printChar('}', args->color ? BRACKETS_1 + *indent_level : OTHER);
-                    if (readPipe() == ',') {
-                        printChar(',', OTHER);
-                    }
-                    printChar('\n', OTHER);
-                    printIndents(*indent_level, args->indent_length);
+            case '}':
+                *indent_level -= 1;
+                printf("\n");
+                printIndents(*indent_level, args->indent_length);
+                printChar('}',
+                          args->color ? BRACKETS_1 + *indent_level : OTHER);
+                if (readPipe() == ',') {
+                    printChar(',', OTHER);
+                }
+                printChar('\n', OTHER);
+                printIndents(*indent_level, args->indent_length);
 
                 break;
 
-                case '[':
-                    printChar('[', args->color ? BRACKETS_1 + *indent_level : OTHER);
-                    printChar('\n', OTHER);
-                    (*indent_level)++;
-                    printIndents(*indent_level, args->indent_length);
+            case '[':
+                printChar('[',
+                          args->color ? BRACKETS_1 + *indent_level : OTHER);
+                printChar('\n', OTHER);
+                (*indent_level)++;
+                printIndents(*indent_level, args->indent_length);
                 break;
 
-                case ']':
-                    *indent_level -= 1;
-                    printf("\n");
-                    printIndents(*indent_level, args->indent_length);
-                    printChar(']', args->color ? BRACKETS_1 + *indent_level : OTHER);
+            case ']':
+                *indent_level -= 1;
+                printf("\n");
+                printIndents(*indent_level, args->indent_length);
+                printChar(']',
+                          args->color ? BRACKETS_1 + *indent_level : OTHER);
                 break;
 
-                case '"':
-                    printChar('"', args->color ? STRING_LITERAL : OTHER);
-                    *in_string_literal = true;
+            case '"':
+                printChar('"', args->color ? STRING_LITERAL : OTHER);
+                *in_string_literal = true;
                 break;
 
-                case ',':
-                    printf(",\n");
-                    printIndents(*indent_level, args->indent_length);
+            case ',':
+                printf(",\n");
+                printIndents(*indent_level, args->indent_length);
                 break;
 
-                case ':':
-                    printf(": ");
+            case ':':
+                printf(": ");
                 break;
 
-                case '/':
-                    if(readPipe() == '/'){
-                        printChar('/', COMMENT);
-                        printChar('/', COMMENT);
-                        while(1){
-                            char comment = readPipe();
-                            if(comment == 0){
-                                printChar('\n', OTHER);
-                                return;
-                            } else if(comment == '\n') {
-                                printChar('\n', OTHER);
-                                printIndents(*indent_level, args->indent_length);
-                                break;
-                            } else {
-                                printChar(comment, COMMENT);
-                            }
+            case '/':
+                if (readPipe() == '/') {
+                    printChar('/', COMMENT);
+                    printChar('/', COMMENT);
+                    while (1) {
+                        char comment = readPipe();
+                        if (comment == 0) {
+                            printChar('\n', OTHER);
+                            return;
+                        } else if (comment == '\n') {
+                            printChar('\n', OTHER);
+                            printIndents(*indent_level, args->indent_length);
+                            break;
+                        } else {
+                            printChar(comment, COMMENT);
                         }
                     }
+                }
                 break;
 
-                case ' ':
+            case ' ':
                 break;
-                case '\n':
+            case '\n':
                 break;
 
-                default:
-                    if ((c >= '0' && c <= '9') || c == '.') {
-                        printChar(c, args->color ? NUMBER_LITERAL : OTHER);
-                    } else {
-                        printChar(c, OTHER);
-                    }
+            default:
+                if ((c >= '0' && c <= '9') || c == '.') {
+                    printChar(c, args->color ? NUMBER_LITERAL : OTHER);
+                } else {
+                    printChar(c, OTHER);
+                }
                 break;
-            } 
+            }
 
         } else { // if(in_string_literal)
-            if(c == '"'){
+            if (c == '"') {
                 *in_string_literal = false;
             }
             printChar(c, args->color ? STRING_LITERAL : OTHER);

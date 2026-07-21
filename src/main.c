@@ -1,10 +1,11 @@
 #include <stdbool.h>
-#include "PrintJson.h"
-#include "Args.h"
 
-int main(int argc, char **argv){
+#include "Args.h"
+#include "PrintJson.h"
+
+int main(int argc, char **argv) {
     struct Args args;
-    parseArgs(&args ,argc, argv);
+    parseArgs(&args, argc, argv);
 
     int indent_level = 0;
     bool in_string_literal = false;

@@ -11,37 +11,37 @@
 
 #define ANSI_COLOR_RESET "\x1b[0m"
 
-void printChar(char c, enum Color color){
+void printChar(char c, enum Color color) {
     switch (color) {
-        case STRING_LITERAL:
+    case STRING_LITERAL:
         printf("%s%c%s", ANSI_COLOR_GREEN, c, ANSI_COLOR_RESET);
         break;
 
-        case NUMBER_LITERAL:
+    case NUMBER_LITERAL:
         printf("%s%c%s", ANSI_COLOR_BLUE, c, ANSI_COLOR_RESET);
         break;
 
-        case OTHER:
+    case OTHER:
         printf("%c", c);
         break;
 
-        case BRACKETS_1:
+    case BRACKETS_1:
         printf("%s%c%s", ANSI_COLOR_YELLOW, c, ANSI_COLOR_RESET);
         break;
 
-        case BRACKETS_2:
+    case BRACKETS_2:
         printf("%s%c%s", ANSI_COLOR_CYAN, c, ANSI_COLOR_RESET);
         break;
 
-        case BRACKETS_3:
+    case BRACKETS_3:
         printf("%s%c%s", ANSI_COLOR_ORANGE, c, ANSI_COLOR_RESET);
         break;
 
-        case COMMENT:
+    case COMMENT:
         printf("%s%c%s", ANSI_COLOR_GRAY, c, ANSI_COLOR_RESET);
         break;
 
-        default:
+    default:
         printf("UNKNOWN COLOR");
         break;
     }
